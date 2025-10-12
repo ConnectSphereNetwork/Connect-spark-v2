@@ -1,27 +1,15 @@
 "use client"
 
-
-
 import { useEffect, useRef, useState } from "react";
-
 import { useParams } from "next/navigation";
-
 import ChatHeader from "@/app/components/ChatHeader";
-
 import { useSocket } from "@/hooks/useSocket";
-
 import { useAuth } from "@/context/AuthContext";
-
 import { Button } from "@/app/components/ui/button";
-
 import { Textarea } from "@/app/components/ui/textarea";
-
 import { SendHorizontal } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-
 import { getJson, postJson } from "@/lib/api";
-
 import { Avatar, AvatarFallback } from "@/app/components/ui/avatar";
 
 interface Message {
@@ -45,10 +33,10 @@ export default function ChatRoomPage() {
   const [newMessage, setNewMessage] = useState("");
   const [otherUser, setOtherUser] = useState<Participant | null>(null);
   const [requestStatus, setRequestStatus] = useState<"idle" | "sent" | "friends">("idle");
-  const viewportRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (user && otherUser && user.friends?.includes(otherUser._id)) {
+    if (user && otherUser && user.friends.includes(otherUser._id)) {
       setRequestStatus("friends");
     }
   }, [user, otherUser]);
@@ -89,9 +77,7 @@ export default function ChatRoomPage() {
   }, [socket, chatId]);
 
   useEffect(() => {
-    if (viewportRef.current) {
-      viewportRef.current.scrollTop = viewportRef.current.scrollHeight;
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -119,32 +105,42 @@ export default function ChatRoomPage() {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <ChatHeader 
-        otherUser={otherUser} 
-        requestStatus={requestStatus} 
-        onSendFriendRequest={handleSendFriendRequest} 
-      />
-      <div ref={viewportRef} className="flex-1 p-4 overflow-y-auto bg-[url('/chat-bg-pattern.png')] bg-repeat">
-        <div className="flex flex-col gap-4">
-          {messages.map((msg, index) => {
-            const isSelf = msg.sender.username === user?.username;
-            return (
-              <div key={index} className={cn("flex items-end gap-2", isSelf ? "justify-end" : "justify-start")}>
-                {!isSelf && <Avatar className="h-6 w-6"><AvatarFallback>{msg.sender.username[0]}</AvatarFallback></Avatar>}
-                <div className={cn("max-w-[70%] rounded-lg px-3 py-2 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300", isSelf ? "bg-primary text-primary-foreground rounded-br-none" : "bg-muted rounded-bl-none")}>
-                  {!isSelf && <p className="text-xs font-bold text-primary mb-1">{msg.sender.username}</p>}
-                  <p className="text-sm break-words">{msg.text}</p>
-                  <p className="text-xs opacity-60 text-right mt-1">
-                    {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
+    <div className="flex flex-col h-screen">
+      {/* Fixed Header */}
+      <div className="flex-shrink-0">
+        <ChatHeader 
+          otherUser={otherUser} 
+          requestStatus={requestStatus} 
+          onSendFriendRequest={handleSendFriendRequest} 
+        />
+      </div>
+      
+      {/* Scrollable Messages Area */}
+      <div className="flex-1 overflow-y-auto bg-[url('/chat-bg-patternn.png')] bg-repeat">
+        <div className="p-4">
+          <div className="flex flex-col gap-4">
+            {messages.map((msg, index) => {
+              const isSelf = msg.sender.username === user?.username;
+              return (
+                <div key={index} className={cn("flex items-end gap-2", isSelf ? "justify-end" : "justify-start")}>
+                  {!isSelf && <Avatar className="h-6 w-6"><AvatarFallback>{msg.sender.username[0]}</AvatarFallback></Avatar>}
+                  <div className={cn("max-w-[70%] rounded-lg px-3 py-2 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300", isSelf ? "bg-primary text-primary-foreground rounded-br-none" : "bg-muted rounded-bl-none")}>
+                    {!isSelf && <p className="text-xs font-bold text-primary mb-1">{msg.sender.username}</p>}
+                    <p className="text-sm break-words">{msg.text}</p>
+                    <p className="text-xs opacity-60 text-right mt-1">
+                      {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+            <div ref={messagesEndRef} />
+          </div>
         </div>
       </div>
-      <div className="p-2 md:p-4 border-t bg-background/80 backdrop-blur-sm">
+      
+      {/* Fixed Input Area */}
+      <div className="flex-shrink-0 p-2 md:p-4 border-t bg-background/80 backdrop-blur-sm">
         <form onSubmit={handleSendMessage} className="flex items-center gap-2">
           <Textarea placeholder="Type a message..." value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}

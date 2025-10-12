@@ -9,7 +9,7 @@ interface User {
   username: string;
   email: string;
   tokens: number;
-  friends: string[];
+  friends: string[]; 
 }
 
 // Context ka structure
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const checkUserStatus = async () => {
       try {
         // Backend se check karo ki user logged in hai ya nahi
-        const response = await axios.get('https://connectsphere-hcim.onrender.com/api/auth/me', {
+        const response = await axios.get('http://localhost:5001/api/auth/me', {
           withCredentials: true, // Cookies bhejne ke liye zaroori
         });
         setUser(response.data.data.user);
