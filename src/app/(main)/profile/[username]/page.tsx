@@ -3,26 +3,12 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-
-import { cn } from "@/lib/utils";
-
-
-
-// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
-
-
-
-// Icons
-import { Linkedin, Github, Twitter, Globe, MapPin, CalendarDays, MessageSquare, UserPlus, Check, Coins, BadgeCheck, Lock } from "lucide-react";
-import EditProfileDialog from "@/app/components/EditProfileDialog";
+import {  MapPin, CalendarDays, MessageSquare, BadgeCheck, Lock } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 import { Button } from "@/app/components/ui/button";
-import { getJson, postJson, putJson } from "@/lib/api";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
-import { Switch } from "@/app/components/ui/switch";
-import { Label } from "@/app/components/ui/label";
-// import { Tooltip } from "";
+import { getJson} from "@/lib/api";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/app/components/ui/tooltip";
 
 
 interface ProfileUser {
@@ -114,8 +100,7 @@ export default function ProfilePage() {
     );
   }
 
-  const ActionButton = () => { /* ... same as before ... */ };
-  const SettingsCard = () => { /* ... same as before ... */ };
+
 
   return (
     <main className="overflow-y-auto bg-muted/40 p-4 md:p-6">

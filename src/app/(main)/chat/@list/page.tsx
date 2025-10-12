@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
+import { , CardHeader, CardTitle } from "@/app/components/ui/card";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 

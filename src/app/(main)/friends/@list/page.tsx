@@ -3,18 +3,16 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-
 import { usePathname } from "next/navigation";
 import { useOnlineStatus } from "@/context/OnlineStatusContext";
-
-// import { Button } from "@/app/components/ui/button";
 import { ScrollArea } from "@/app/components/ui/scroll-area";
 import { deleteJson, getJson, putJson } from "@/lib/api";
-import { CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
+import { CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { Button } from "@/app/components/ui/button";
 import { Badge } from "lucide-react";
+
 
 
 interface Friend { _id: string; username: string; }

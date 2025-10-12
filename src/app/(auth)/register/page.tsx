@@ -1,7 +1,5 @@
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card"
-// import LoginForm from "@/app/components/auth/login-form"
-
 import AuthScene from "@/app/components/auth/auth-scene"
 import SignupForm from "@/app/components/auth/signup-form"
 

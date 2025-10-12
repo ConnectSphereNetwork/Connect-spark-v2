@@ -20,14 +20,9 @@ import EditProfileDialog from "@/app/components/EditProfileDialog";
 import { getJson, postJson } from "@/lib/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 import { Button } from "@/app/components/ui/button";
-import { ScrollArea } from "@/app/components/ui/scroll-area";
-import { Textarea } from "@/app/components/ui/textarea";
-// import { Tooltip } from "@/app/components/ui/tooltip";
+
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/app/components/ui/tooltip";
 
-// import { Button } from "@/app/components/ui/button";
-// import { ScrollArea } from "@/app/components/ui/scroll-area";
-// import { Textarea } from "@/app/components/ui/textarea";
 
 
 

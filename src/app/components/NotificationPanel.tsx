@@ -3,12 +3,11 @@
 import { Bell } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
-// import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { Button } from "./ui/button";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useState } from "react";
 
-// A placeholder for the content for now.
 const NotificationContent = () => (
     <div className="p-4">
         <h4 className="font-medium leading-none">Notifications</h4>
@@ -21,8 +20,7 @@ export function NotificationPanel() {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  // Placeholder for notification data
-  const unreadCount = 0; // We will replace this with real data
+  const unreadCount = 0; 
 
   if (isDesktop) {
     return (

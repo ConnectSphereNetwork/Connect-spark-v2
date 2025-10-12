@@ -1,7 +1,6 @@
 "use client"
 
 import AuthScene from "@/app/components/auth/auth-scene"
-import Header from "@/app/components/Header"
 import ProtectedRoute from "@/app/components/ProtectedRoute"
 import PushNotificationManager from "@/app/components/PushNotificationManager"
 import { Button } from "@/app/components/ui/button"
