@@ -15,7 +15,7 @@ import { Switch } from "@/app/components/ui/switch";
 import { Label } from "@/app/components/ui/label";
 
 // Icons
-import { MapPin, CalendarDays, MessageSquare, BadgeCheck, Lock } from "lucide-react";
+import { MapPin, CalendarDays, MessageSquare, BadgeCheck, Lock, Check } from "lucide-react";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
 import EditProfileDialog from "@/app/components/EditProfileDialog";
 
@@ -41,7 +41,22 @@ interface ProfileUser {
   };
 }
 
-
+// --- Helper Components ---
+const SocialLink = ({ href, icon: Icon, label }: { href?: string; icon: React.ElementType; label: string }) => {
+  if (!href) return null;
+  return (
+    <TooltipProvider delayDuration={0}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+            <Icon className="w-5 h-5" />
+          </a>
+        </TooltipTrigger>
+        <TooltipContent><p>{label}</p></TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
 
 // --- Main Page Component ---
 export default function ProfilePage() {
@@ -128,7 +143,7 @@ export default function ProfilePage() {
   if (profileUser.isPrivate) {
     return (
         <ProtectedRoute>
-          <div className="flex flex-col h-screen"><Header />
+          <div className="flex flex-col h-screen">
             <main className="flex-1 flex items-center justify-center text-center">
                 <Card className="p-8 max-w-sm mx-auto">
                     <Avatar className="w-24 h-24 mx-auto border-4 mb-4"><AvatarImage src={`https://avatar.vercel.sh/${profileUser.username}.png`} /><AvatarFallback>{profileUser.username.slice(0, 2).toUpperCase()}</AvatarFallback></Avatar>
