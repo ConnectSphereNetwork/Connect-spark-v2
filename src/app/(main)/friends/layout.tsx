@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 
 export default function FriendsLayout({ list, details }: { list: React.ReactNode; details: React.ReactNode; }) {
   const pathname = usePathname();
-  const isDetailsPage = pathname.split('/').length > 2; // e.g. /friends/some-user
+  const isDetailsPage = pathname.split('/').length > 2; 
 
   return (
     <div className="grid md:grid-cols-[350px_1fr] h-full">

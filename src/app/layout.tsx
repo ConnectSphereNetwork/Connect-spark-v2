@@ -26,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable} h-full`} suppressHydrationWarning>
      <body className="font-sans h-full">
-
         <Suspense fallback={null}>
           <ThemeProvider
             attribute="class"
@@ -34,10 +33,12 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
-            {/* 2. Wrap children with AuthProvider */}
+          
             <AuthProvider>
+
                 <NotificationProvider>
               <OnlineStatusProvider> 
+
               {children}
             </OnlineStatusProvider>
             </NotificationProvider>

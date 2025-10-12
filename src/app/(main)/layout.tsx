@@ -1,20 +1,36 @@
-// import Sidebar from "@/components/Sidebar";
-// import BottomNavBar from "@/components/BottomNavBar";
+"use client"
 
+import { usePathname } from 'next/navigation';
 import BottomNavBar from "../components/BottomNavBar";
 import Sidebar from "../components/Sidebar";
+import { cn } from '@/lib/utils';
 
 export default function MainAppLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isChatPage = pathname.includes('/chat/');
+  
   return (
-    <div className="flex min-h-screen w-full">
-     <Sidebar/>
-     <BottomNavBar/>
-      {/* On mobile (small screens), add padding-bottom to prevent content from being hidden by the bottom nav.
-        On desktop (sm and up), add padding-left to make space for the sidebar.
-      */}
-      <main className="flex-1 sm:pl-16 pb-16 sm:pb-0">
+    <div className="flex min-h-screen w-full bg-background">
+      {/* Desktop Sidebar - Hidden on mobile */}
+      <div className="hidden sm:block fixed left-0 top-0 h-full z-30">
+        <Sidebar />
+      </div>
+      
+      {/* Main Content Area */}
+      <main className={cn(
+        "flex-1 w-full transition-all duration-200",
+        "sm:pl-16", // Account for sidebar on desktop
+        isChatPage ? "pb-0" : "pb-16 sm:pb-0" // Hide bottom nav on chat pages
+      )}>
         {children}
       </main>
+      
+      {/* Mobile Bottom Navigation - Hidden on chat pages */}
+      {!isChatPage && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden">
+          <BottomNavBar />
+        </div>
+      )}
     </div>
   );
 }

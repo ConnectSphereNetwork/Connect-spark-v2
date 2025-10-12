@@ -24,7 +24,7 @@ export default function Sidebar() {
         <nav className="flex flex-col items-center gap-4 px-2 py-4">
           <Link href="/dashboard" className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base">
             <p>CS</p>
-            <span className="sr-only">ConnectSphere</span>
+            <span className="sr-only">ConnectSpark</span>
           </Link>
           {navItems.map((item) => (
             <Tooltip key={item.label}>
