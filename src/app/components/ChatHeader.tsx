@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { CardHeader, CardTitle } from "./ui/card";
 import { ArrowLeft, Check, UserPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Participant {
   _id: string;
@@ -21,6 +22,7 @@ export default function ChatHeader({ otherUser, requestStatus, onSendFriendReque
   const { onlineUsers } = useOnlineStatus();
   const isOnline = otherUser ? onlineUsers.has(otherUser._id) : false;
   const otherUserInitial = otherUser?.username?.[0]?.toUpperCase() ?? "U";
+   const router = useRouter();
 
   return (
     <CardHeader className="border-b">
