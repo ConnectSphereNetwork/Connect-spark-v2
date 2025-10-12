@@ -48,7 +48,7 @@ export default function ChatRoomPage() {
   const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (user && otherUser && user.friends.includes(otherUser._id)) {
+    if (user && otherUser && user.friends?.includes(otherUser._id)) {
       setRequestStatus("friends");
     }
   }, [user, otherUser]);

@@ -9,6 +9,7 @@ interface User {
   username: string;
   email: string;
   tokens: number;
+  friends: string[];
 }
 
 // Context ka structure
