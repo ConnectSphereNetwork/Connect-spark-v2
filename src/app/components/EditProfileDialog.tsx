@@ -4,17 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-// import { putJson } from "@/utils/api"; // FIX: Corrected API import path
-
-// import { Button } from "@/components/ui/button";
-
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "./ui/dialog";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
-// import { Input } from "@/components/ui/input";
-// import { Textarea } from "@/components/ui/textarea";
-// import { ScrollArea } from "@/components/ui/scroll-area";
-
-
 import { Github, Linkedin } from "lucide-react";
 import { putJson } from "@/lib/api";
 import { Button } from "./ui/button";
@@ -33,7 +24,6 @@ interface ProfileData {
   };
 }
 
-// FIX: Added the complete Zod validation schema
 const formSchema = z.object({
   fullName: z.string().max(50).optional(),
   headline: z.string().max(100).optional(),
