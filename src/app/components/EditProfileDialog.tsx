@@ -29,7 +29,7 @@ const formSchema = z.object({
   headline: z.string().max(100).optional(),
   bio: z.string().max(500).optional(),
   location: z.string().optional(),
-  skills: z.string().transform(val => val.split(',').map(s => s.trim()).filter(Boolean)),
+   skills: z.string().optional(),
   socialLinks: z.object({
     linkedin: z.string().url().optional().or(z.literal('')),
     github: z.string().url().optional().or(z.literal('')),
